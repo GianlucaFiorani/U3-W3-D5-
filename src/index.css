@@ -180,5 +180,5 @@ ul {
   transform: scale(1.1);
 }
 .playing {
-  height: 250px;
+  width: fit-content;
 }

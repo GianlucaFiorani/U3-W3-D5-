@@ -10,7 +10,7 @@ const AlbumCard = ({ singleSong }) => {
   const favorites = useSelector((state) => state.favorites.content);
 
   useEffect(() => {
-    favorites.map((favMusic) => favMusic.id === singleSong.id && setHeart(false));
+    favorites.filter((favMusic) => favMusic.id === singleSong.id).length > 0 ? setHeart(false) : setHeart(true);
   }, [favorites]);
 
   return (
@@ -24,7 +24,6 @@ const AlbumCard = ({ singleSong }) => {
         className="mb-3"
         onClick={() => {
           heart ? dispatch(addToFaoritesAction(singleSong)) : dispatch(removeFromFavoritesAction(singleSong.id));
-          setHeart(!heart);
         }}
       >
         {heart ? <Heart /> : <HeartFill className="text-spoty" />}

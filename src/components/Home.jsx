@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import Player from "./Player";
 
 const Home = () => {
+  const s = false;
   return (
     <>
       <Container fluid>
@@ -19,6 +20,7 @@ const Home = () => {
                 <a href="#">DISCOVER</a>
               </Col>
             </Row>
+            {s && <MusicCollaction query="queen" title="Search:" />}
             <MusicCollaction query="queen" title="Rock Classics" />
             <MusicCollaction query="katyperry" title="Pop Culture" />
             <MusicCollaction query="eminem" title="#HipHop" h={true} />
