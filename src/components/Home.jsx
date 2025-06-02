@@ -2,12 +2,19 @@ import { Col, Container, Row } from "react-bootstrap";
 import MusicCollaction from "./MusicSection";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { BookFill } from "react-bootstrap-icons";
 
 const Home = () => {
-  const s = false;
+  const search = useSelector((state) => state.search.content);
   return (
     <>
       <Container fluid>
+        <Link to={"/favorites"} className="btn favorite-link">
+          <BookFill />
+          &nbsp; Your Library
+        </Link>
         <Row>
           <Sidebar />
           <Col xs={12} md={9} className="offset-md-3 mainPage">
@@ -20,7 +27,7 @@ const Home = () => {
                 <a href="#">DISCOVER</a>
               </Col>
             </Row>
-            {s && <MusicCollaction query="queen" title="Search:" />}
+            {search && <MusicCollaction query={search} title="Search:" s={true} />}
             <MusicCollaction query="queen" title="Rock Classics" />
             <MusicCollaction query="katyperry" title="Pop Culture" />
             <MusicCollaction query="eminem" title="#HipHop" h={true} />

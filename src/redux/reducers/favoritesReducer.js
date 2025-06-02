@@ -17,7 +17,6 @@ const favoritesReducer = (state = initialState, action) => {
         content: state.content.filter((j) => j.id !== action.payload),
       };
     default:
-      console.log("DEFAULT");
       return state;
   }
 };

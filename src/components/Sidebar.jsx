@@ -1,13 +1,27 @@
-import { Button, Col, Container, Nav } from "react-bootstrap";
+import { Button, Col, Container, Form, Nav } from "react-bootstrap";
 import logo from "../assets/logo/logo.png";
 import { BookFill, HouseDoorFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { searchAction } from "../redux/action";
 const Sidebar = () => {
+  const dispach = useDispatch();
+  const [query, setQuery] = useState("");
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispach(searchAction(query));
+  };
+
   return (
     <Col xs={2}>
       <Nav className="navbar navbar-expand-md fixed-left justify-content-between" id="sidebar">
         <Container className="flex-column align-items-start">
-          <a className="navbar-brand" href="index.html">
+          <a className="navbar-brand" href="/">
             <img src={logo} alt="Spotify Logo" width="131" height="40" />
           </a>
           <Button
@@ -37,12 +51,14 @@ const Sidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <div className="input-group mt-3">
-                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" />
+                  <Form className="input-group mt-3" onSubmit={handleSubmit}>
+                    <Form.Control type="search" value={query} onChange={handleChange} placeholder="Search" aria-label="Search" />
                     <div className="input-group-append">
-                      <button className="btn btn-outline-secondary btn-sm h-100">GO</button>
+                      <Button variant="outline-secondary" className=" btn-sm h-100" type="submit">
+                        GO
+                      </Button>
                     </div>
-                  </div>
+                  </Form>
                 </li>
               </ul>
             </div>

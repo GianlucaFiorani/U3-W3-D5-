@@ -1,19 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getMusicAction } from "../redux/action";
 import AlbumCard from "./AlbumCard";
 
-const MusicSection = ({ title, query, h }) => {
+const MusicSection = ({ title, query, h, s }) => {
   const dispatch = useDispatch();
-  const music = useSelector((state) => state.music.content.data);
-  const search = useSelector((state) => state.music.search.data);
+  const [music, setMusic] = useState([]);
+  const search = useSelector((state) => state.music.search);
+  const isLoading = useSelector((state) => state.music.isLoading);
   const baseEndpoint = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
+
   useEffect(() => {
-    console.log(search);
-    console.log(query);
     dispatch(getMusicAction(baseEndpoint + query));
-  }, []);
+  }, [query]);
+  useEffect(() => {
+    !isLoading && setMusic(JSON.parse(localStorage.getItem(query)));
+  }, [isLoading]);
 
   return (
     <Row>
@@ -21,7 +24,7 @@ const MusicSection = ({ title, query, h }) => {
         <div className="music">
           <h2>{title}</h2>
           <Row xs={1} sm={2} lg={3} xl={4} className="imgLinks py-3" id={h && "hipHopSection"}>
-            {music?.slice(0, 4).map((song) => (
+            {music?.data?.slice(0, 4).map((song) => (
               <AlbumCard key={song.id} singleSong={song} />
             ))}
           </Row>

@@ -1,4 +1,4 @@
-import { SET_MUSIC, SET_MUSIC_LOADING_OFF, SET_MUSIC_LOADING_ON, SET_SEARCH } from "../action";
+import { SET_MUSIC, SET_MUSIC_LOADING_OFF, SET_MUSIC_LOADING_ON } from "../action";
 
 const initialState = {
   content: [],
@@ -13,11 +13,7 @@ const musicReducer = (state = initialState, action) => {
         ...state,
         content: action.payload,
       };
-    case SET_SEARCH:
-      return {
-        ...state,
-        search: action.payload,
-      };
+
     case SET_MUSIC_LOADING_ON:
       return {
         ...state,
