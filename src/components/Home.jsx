@@ -1,13 +1,15 @@
 import { Col, Container, Row } from "react-bootstrap";
-import MusicCollaction from "./MusicSection";
+import MusicSection from "./MusicSection";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BookFill } from "react-bootstrap-icons";
+import { useEffect } from "react";
 
 const Home = () => {
   const search = useSelector((state) => state.search.content);
+
   return (
     <>
       <Container fluid>
@@ -27,10 +29,10 @@ const Home = () => {
                 <a href="#">DISCOVER</a>
               </Col>
             </Row>
-            {search && <MusicCollaction query={search} title="Search:" s={true} />}
-            <MusicCollaction query="queen" title="Rock Classics" />
-            <MusicCollaction query="katyperry" title="Pop Culture" />
-            <MusicCollaction query="eminem" title="#HipHop" h={true} />
+            {search && <MusicSection query={search} title="Search:" s={true} />}
+            <MusicSection query="queen" title="Rock Classics" />
+            <MusicSection query="katyperry" title="Pop Culture" />
+            <MusicSection query="eminem" title="#HipHop" h={true} />
           </Col>
         </Row>
       </Container>
